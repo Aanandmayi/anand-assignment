@@ -1,0 +1,49 @@
+  * {
+      box-sizing: border-box;
+  }
+
+  body {
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+  }
+
+  /* Clear floats after the columns */
+  section::after {
+      content: "";
+      display: table;
+      clear: both;
+  }
+
+  /* Create two columns/boxes that floats next to each other */
+  #bluebox {
+      float: left;
+      width: 48%;
+      text-align: center;
+      height: 450px;
+      background: #ccc;
+      padding: 30px;
+      margin-right: 2px;
+  }
+
+  #blackbox {
+      margin-left: 2px;
+      float: right;
+      padding: 30px;
+      text-align: center;
+      color: aliceblue;
+      width: 48%;
+      background-color: rgb(109, 129, 70);
+      bottom: 0;
+      height: 450px;
+  }
+
+  #bigflex {
+      margin-top: 10px;
+      background-color: #666;
+      padding: 30px;
+      text-align: center;
+      color: black  ;
+      height: 400px;
+      width: 100%;
+
+  }
