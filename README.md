@@ -1,4 +1,7 @@
 please run the server first
+
+API TIMMINGS ARE IN THE API TESTS FOLDER
+
 Step -0 Run 'npm install --save'
 Step-1 - change the database password and username in the DatabaseConfig.js file
 
