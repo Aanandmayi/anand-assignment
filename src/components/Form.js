@@ -28,6 +28,7 @@ class Form extends Component {
             email: '',
             phone: null,
             TotalMarks: null,
+            Count: 0,
 
             userNameError: '',
             lastNameError: '',
@@ -94,7 +95,7 @@ class Form extends Component {
             emailError = "invalid email";
         }
 
-        if (!this.state.phone || (this.state.phone).length != 10) {
+        if (!this.state.phone || (this.state.phone).length !== 10) {
             phoneError = "name cannot be blank / should be of 10 digit / Not a Number";
         }
 
@@ -102,8 +103,8 @@ class Form extends Component {
             marksError = "invalid- Total Marks should be 0 - 100 ";
         }
 
-        if (emailError || userNameError || lastNameError || marksError) {
-            this.setState({ userNameError, lastNameError, emailError, marksError });
+        if (emailError || userNameError || lastNameError || marksError || phoneError) {
+            this.setState({ userNameError, lastNameError, emailError, marksError, phoneError });
             return false;
         }
         return true;
@@ -144,75 +145,84 @@ class Form extends Component {
     }
 
 
+    getCount = () => {
+        //submit the form
+        axios.get('http://localhost:3000/getCount')
+            .then((response) => {
+                console.log("response-----" + response);
+                this.setState({ Count: response.count })
+            }).catch((err) => {
+                console.log(err);
+            })
+    }
 
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <div>
-                    <label>ID</label>
-                    <input type='text' value={this.state.id} onChange={this.handleIdChange}></input>
-                </div>
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                    <div>
+                        <label>ID</label>
+                        <input type='text' value={this.state.id} onChange={this.handleIdChange}></input>
+                    </div>
 
 
-                <div>
-                    <label>First Name</label>
-                    <input type='text' value={this.state.firstName} onChange={this.handleUsernameChange}></input>
-                </div>
-                {/* for error */}
-                <div style={{ fontSize: 16, color: "red" }}>
-                    {this.state.userNameError}
-                </div>
+                    <div>
+                        <label>First Name</label>
+                        <input type='text' value={this.state.firstName} onChange={this.handleUsernameChange}></input>
+                    </div>
+                    {/* for error */}
+                    <div style={{ fontSize: 16, color: "red" }}>
+                        {this.state.userNameError}
+                    </div>
 
 
-                <div>
-                    <label>Last Name</label>
-                    <input type='text' value={this.state.lastName} onChange={this.handleLastNameChange}></input>
-                </div>
-                {/* for error */}
-                <div style={{ fontSize: 16, color: "red" }}>
-                    {this.state.lastNameError}
-                </div>
+                    <div>
+                        <label>Last Name</label>
+                        <input type='text' value={this.state.lastName} onChange={this.handleLastNameChange}></input>
+                    </div>
+                    {/* for error */}
+                    <div style={{ fontSize: 16, color: "red" }}>
+                        {this.state.lastNameError}
+                    </div>
 
-                <div>
-                    <label>Email</label>
-                    <input type='text' value={this.state.email} onChange={this.handleEmailChange}></input>
-                </div>
-                {/* for error */}
-                <div style={{ fontSize: 16, color: "red" }}>
-                    {this.state.emailError}
-                </div>
-
-
-                <div>
-                    <label>Phone Number</label>
-                    <input type='text' value={this.state.phone} onChange={this.handlePhoneNumberChange}></input>
-                </div>
-                {/* for error */}
-                <div style={{ fontSize: 16, color: "red" }}>
-                    {this.state.phoneError}
-                </div>
+                    <div>
+                        <label>Email</label>
+                        <input type='text' value={this.state.email} onChange={this.handleEmailChange}></input>
+                    </div>
+                    {/* for error */}
+                    <div style={{ fontSize: 16, color: "red" }}>
+                        {this.state.emailError}
+                    </div>
 
 
-                <div>
-                    <label>Total Marks</label>
-                    <input type='text' value={this.state.TotalMarks} onChange={this.handleTotalMarksChange}></input>
-                </div>
-                {/* for error */}
-                <div style={{ fontSize: 16, color: "red" }}>
-                    {this.state.marksError}
-                </div>
+                    <div>
+                        <label>Phone Number</label>
+                        <input type='text' value={this.state.phone} onChange={this.handlePhoneNumberChange}></input>
+                    </div>
+                    {/* for error */}
+                    <div style={{ fontSize: 16, color: "red" }}>
+                        {this.state.phoneError}
+                    </div>
 
-                <button type='submit' >
-                    Add
+
+                    <div>
+                        <label>Total Marks</label>
+                        <input type='text' value={this.state.TotalMarks} onChange={this.handleTotalMarksChange}></input>
+                    </div>
+                    {/* for error */}
+                    <div style={{ fontSize: 16, color: "red" }}>
+                        {this.state.marksError}
+                    </div>
+
+                    <button type='submit' >
+                        Add
                 </button>
-                <button type='button' onClick={this.updateTable}>
-                    Update
+                    <button type='button' onClick={this.updateTable}>
+                        Update
                 </button>
-                <button type='button'>
-                    Count
-                </button>
-            </form>
+                </form>
+            </div>
 
         )
     }

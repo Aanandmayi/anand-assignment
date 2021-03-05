@@ -1,6 +1,6 @@
 import React from 'react'
 import Form from "./components/Form"
-
+import BookList from "./components/CountDiv"
 
 class App extends React.Component {
 
@@ -11,8 +11,11 @@ class App extends React.Component {
           <section>
             <div id="bluebox" className="resizable">
               <Form>
-                
+
               </Form>
+              <BookList>
+
+              </BookList>
             </div>
             <div id="blackbox" className="resizable">I AM A BOARING BOX</div>
           </section>
